@@ -7,20 +7,25 @@
 ```bash
 mkdir edu-http-classic
 cd edu-http-classic
-npm init -y
 touch server.js
+npm init -y
 mkdir public
 touch ./public/index.html
 touch ./public/index.js
 touch ./public/index.css
 curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
+npm pkg set scripts.dev="nodemon server.js"
+npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
 npm install nodemon --save-dev
 npm install jest --save-dev
 touch app.json
-touch Procfile
+echo "web: npm start" > Procfile
+git init
+git add .
+git commit -m "Initial commit"
 ```
 
 ## server.js
