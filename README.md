@@ -1,5 +1,7 @@
 # edu-http-classic-js
 
+## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
+
 ## Förberedelse
 
 > Registrera konto på [Heroku](https://devcenter.heroku.com/). Det är frivilligt, då det är en betaltjänst och kräver kreditkort. 
