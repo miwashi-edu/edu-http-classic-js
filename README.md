@@ -66,6 +66,6 @@ heroku create edu-http-classic-[lägg till något unikt]
 git push heroku main
 heroku open
 heroku logs --tail
-heroku destrou --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
+heroku destroy --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
 ```
 
