@@ -27,6 +27,7 @@ brew tap heroku/brew && brew install heroku
 ## Instructions
 
 ```bash
+rm -rf edu-http-classic #Om den finns
 mkdir edu-http-classic
 cd edu-http-classic
 touch server.js
