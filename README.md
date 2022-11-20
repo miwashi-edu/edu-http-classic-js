@@ -1,5 +1,23 @@
 # edu-http-classic-js
 
+## Förberedelse
+
+> Registrera konto på [Heroku](https://devcenter.heroku.com/). Det är frivilligt, då det är en betaltjänst och kräver kreditkort. 
+> Heroku är dock det absolut lättaste sättet att få en Node.js applikation i drift, så det kan vara värt det.
+
+### PC
+
+```bash
+choco install curl
+choco install heroku-cli
+```
+
+### Mac
+
+```bash
+brew tap heroku/brew && brew install heroku
+```
+
 [serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
 [nodemon](https://www.npmjs.com/package/nodemon)
 [jest](https://www.npmjs.com/package/jest)
