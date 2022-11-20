@@ -41,7 +41,7 @@ const app = express()
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.static('public'))
 
-app.listen(3000, console.log(`http server listening on port ${PORT}`))
+app.listen(PORT, console.log(`http server listening on port ${PORT}`))
 ```
 
 ## ./public/index.html
