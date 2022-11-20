@@ -34,7 +34,7 @@ git add .
 git commit -m "Initial commit"
 ```
 
-![favicon](https://www.jensenyh.se/favicon.ico)
+![favicon](https://www.jensenyh.se/favicon.ico)  
 [gist: server.js]( https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529)  
 [gist: index.html](https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8)  
 [gist: .gitignore](https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796)  
