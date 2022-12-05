@@ -43,7 +43,7 @@ npm pkg set jest.runner="groups"
 
 describe('jest', () => {
   test('unit test', () => {
-    it('should work', , () => {
+    it('should work', () => {
       expect(1).toBe(1);
     });
   });
@@ -58,7 +58,7 @@ describe('jest', () => {
 
 describe('jest', () => {
   test('component test', () => {
-    it('should work', , () => {
+    it('should work', () => {
       expect(1).toBe(1);
     });
   });
@@ -74,7 +74,7 @@ describe('jest', () => {
 
 describe('jest', () => {
   test('integration test', () => {
-    it('should work', , () => {
+    it('should work', () => {
       expect(1).toBe(1);
     });
   });
