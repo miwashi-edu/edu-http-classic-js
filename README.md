@@ -1,6 +1,6 @@
 # edu-http-classic-js
 
-> Vi börjar med att bryta ut beskrivningen av vår server ifrån koden som startar upp den. Fördelen blir att vi kan köra vår kod i fler tillämpningar, som till exempel test. 
+> Vi börjar med att bryta ut beskrivningen av vår server ifrån koden som startar upp den. Fördelen blir att vi kan använda vår server i fler tillämpningar, som till exempel test. 
 
 > Vi förbereder också systemet för test körningar som enhetsprov komponentprov samt integrationsprov.
 
