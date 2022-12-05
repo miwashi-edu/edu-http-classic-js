@@ -23,10 +23,13 @@ touch service.js
 touch {.env,.env.test}
 npm install -D jest
 npm install -D jest-runner-groups
+npm install -D supertest
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
 npm pkg set scripts.component_test="jest --group=component"
 npm pkg set scripts.integration_test="jest --group=integration"
 npm pkg set jest.runner="groups"
+git add .
+git commit -m "Added test frameworks"
 ```
 
 ## Tests
