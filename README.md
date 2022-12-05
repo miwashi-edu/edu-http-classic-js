@@ -29,6 +29,8 @@ brew tap heroku/brew && brew install heroku
 ## Instructions
 
 ```bash
+cd ~
+cd ws
 rm -rf edu-http-classic #Om den finns
 mkdir edu-http-classic
 cd edu-http-classic
