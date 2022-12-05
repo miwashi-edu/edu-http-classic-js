@@ -1,6 +1,6 @@
 # edu-http-classic-js
 
-> Vi förbereder också systemet för test körningar som enhetsprov komponentprov samt integrationsprov.
+> Vi förbereder systemet för test-körningar som enhets-test komponent-test samt integrations-test.
 
 ## DoD
 
@@ -8,11 +8,8 @@
 
 ```bash
 npm test
-mpm run unit_test
 npm run component_test
 npm run integration_test
-npm run dev
-npm start
 ```
 
 ## Instruktioner
