@@ -70,7 +70,7 @@ module.exports = app;
 
 ## Tests
 
-### ./__tests__/unit_tests.js
+### unit_tests.js
 
 ```js
 /**
@@ -85,7 +85,7 @@ describe('jest', () => {
   });
 });
 ```
-### ./__tests__/component_tests.js
+### component_tests.js
 
 ```js
 /**
@@ -101,7 +101,7 @@ describe('jest', () => {
 });
 ```
 
-### -/__tests__/integration_tests.js
+### integration_tests.js
 
 ```js
 /**
