@@ -1,73 +1,203 @@
 # edu-http-classic-js
 
-## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
+> Här separerar vi ren server-funktion från enpoints (routes) för vår microservice.
 
-## Förberedelse
-
-> Registrera konto på [Heroku](https://devcenter.heroku.com/). Det är frivilligt, då det är en betaltjänst och kräver kreditkort. 
-> Heroku är dock det absolut lättaste sättet att få en Node.js applikation i drift, så det kan vara värt det.
-
-### PC
-
-```bash
-choco install curl
-choco install heroku-cli
-```
-
-### Mac
-
-```bash
-brew tap heroku/brew && brew install heroku
-```
-
-[serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
-[nodemon](https://www.npmjs.com/package/nodemon)
-[jest](https://www.npmjs.com/package/jest)
-[path](https://www.npmjs.com/package/path)
-[express](https://www.npmjs.com/package/express)
-
-## Instructions
+## Instruktioner
 
 ```bash
 cd ~
 cd ws
-rm -rf edu-http-classic #Om den finns
-mkdir edu-http-classic
 cd edu-http-classic
-touch server.js
-npm init -y
-mkdir public
-touch ./public/index.html
-touch ./public/index.js
-touch ./public/index.css
-curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-curl -L https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
-curl -L https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
-npm pkg set scripts.dev="nodemon server.js"
-npm pkg set scripts.test="jest"
-npm install express
-npm install path
-npm install serve-favicon
-npm install nodemon --save-dev
-npm install jest --save-dev
-echo "web: npm start" > Procfile
-git init
-git add .
-git commit -m "Initial commit"
+mkdir routes
+touch ./routes/user_routes.js
 ```
 
-![favicon](https://www.jensenyh.se/favicon.ico)  
-[gist: server.js]( https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529)  
-[gist: index.html](https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8)  
-[gist: .gitignore](https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796)  
+## DoD
 
 ```bash
-heroku login
-heroku create edu-http-classic-[lägg till något unikt]
-git push heroku main
-heroku open
-heroku logs --tail
-heroku destroy --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
+curl -X POST http://localhost:3000/api/user -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X GET http://localhost:3000/api/user
+curl -X GET http://localhost:3000/api/user/1
+curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X DELETE http://localhost:3000/api/user/1
+
+npm run component_test
+npm run api_test
 ```
 
+## server.js
+
+```js
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.use('/api/user', require('./routes/user_routes.js'));
+
+module.exports = app;
+````
+
+## user_routes.js
+
+```js
+const router = require('express').Router();
+
+router.post("/", (req, res) => {
+    res.status(201).json({id: 1, ...req.body});
+});
+
+router.get("/", (req, res) => {
+    res.status(200).json([]);
+});
+
+router.get("/:id", (req, res) => {
+    res.status(200).json({id: req.params.id});
+});
+
+router.put("/:id", (req, res) => {
+    res.status(200).json({id: req.params.id, ...req.body});
+});
+
+router.delete("/:id", (req, res) => {
+    res.sendStatus(204);
+});
+
+module.exports = router;
+```
+
+## component_test.js
+
+```js
+/**
+ * @group component
+ */
+
+const request = require('supertest')
+const app = require('../server')
+
+describe('When testing /api/user', () => {
+  describe('Post', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .post('/api/user/')
+        .send({user:"user",password:"pw"});
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET All', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .get('/api/user/')
+      expect(res.statusCode).toEqual(200);
+      expect.arrayContaining(res.body);
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .get('/api/user/1');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('PUT', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .put('/api/user/1')
+        .send({user:"user",password:"pw"});
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('DELETE', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .delete('/api/user/1');
+      expect(res.statusCode).toEqual(204);
+    });
+  });
+});
+
+```
+
+## integration_test.js
+
+```js
+/**
+ * @group integration
+ */
+
+const request = require('supertest')
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || `http://localhost:${PORT}`;
+const container = request(HOST);
+
+describe('When testing /api/user', () => {
+  describe('Post', () => {
+    it('should work', async () => {
+      const res = await container
+        .post('/api/user/')
+        .send({user:"user",password:"pw"});
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET All', () => {
+    it('should work', async () => {
+			const res = await container.get('/api/user/');
+			expect(res.statusCode).toEqual(200);
+      expect.arrayContaining(res.body);
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET', () => {
+    it('should work', async () => {
+      const res = await await container
+        .get('/api/user/1');
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('PUT', () => {
+    it('should work', async () => {
+      const res = await await container
+        .put('/api/user/1')
+        .send({user:"user",password:"pw"});
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('DELETE', () => {
+    it('should work', async () => {
+      const res = await await container
+        .delete('/api/user/1');
+      expect(res.statusCode).toEqual(204);
+    });
+  });
+});
+
+```
