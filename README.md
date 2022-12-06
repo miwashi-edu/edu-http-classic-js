@@ -10,6 +10,11 @@ cd ws
 cd edu-http-classic
 mkdir routes
 touch ./routes/user_routes.js
+vi ./routes/user_routes.js
+vi ./__tests__/component_test.js
+vi ./__tests__/integration_test.js
+git add .
+git commit -m "Added component and integration tests."
 ```
 
 ## DoD
@@ -22,6 +27,7 @@ curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json'
 curl -X DELETE http://localhost:3000/api/user/1
 
 npm run component_test
+npm start
 npm run api_test
 ```
 
