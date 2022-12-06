@@ -1,73 +1,131 @@
 # edu-http-classic-js
 
-## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
+> Vi lägger till en fejk databas (som senare kan bytas ut mot en riktig) och ett domän object (user_handler) som hanterar användare i vårt system.
 
-## Förberedelse
+> Vi använder uuid för att skapa unika nycklar till våra användare.
 
-> Registrera konto på [Heroku](https://devcenter.heroku.com/). Det är frivilligt, då det är en betaltjänst och kräver kreditkort. 
-> Heroku är dock det absolut lättaste sättet att få en Node.js applikation i drift, så det kan vara värt det.
+> Observera att nu upphör våra komponent test och integrationstest att fungera och vi behöver tänka om dem.
 
-### PC
-
-```bash
-choco install curl
-choco install heroku-cli
-```
-
-### Mac
-
-```bash
-brew tap heroku/brew && brew install heroku
-```
-
-[serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
-[nodemon](https://www.npmjs.com/package/nodemon)
-[jest](https://www.npmjs.com/package/jest)
-[path](https://www.npmjs.com/package/path)
-[express](https://www.npmjs.com/package/express)
-
-## Instructions
+## Instruktioner
 
 ```bash
 cd ~
 cd ws
-rm -rf edu-http-classic #Om den finns
-mkdir edu-http-classic
 cd edu-http-classic
-touch server.js
-npm init -y
-mkdir public
-touch ./public/index.html
-touch ./public/index.js
-touch ./public/index.css
-curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-curl -L https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
-curl -L https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
-npm pkg set scripts.dev="nodemon server.js"
-npm pkg set scripts.test="jest"
-npm install express
-npm install path
-npm install serve-favicon
-npm install nodemon --save-dev
-npm install jest --save-dev
-echo "web: npm start" > Procfile
-git init
-git add .
-git commit -m "Initial commit"
+npm install uuid
+mkdir domain
+touch ./domain/user_handler.js
+
 ```
 
-![favicon](https://www.jensenyh.se/favicon.ico)  
-[gist: server.js]( https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529)  
-[gist: index.html](https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8)  
-[gist: .gitignore](https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796)  
+## user_handler.js
 
-```bash
-heroku login
-heroku create edu-http-classic-[lägg till något unikt]
-git push heroku main
-heroku open
-heroku logs --tail
-heroku destroy --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
+```js
+
 ```
 
+## user_controller.js
+
+```js
+const userHandler = require('../domain/user_handler.js');
+
+exports.create_user = (req, res) => {
+    try{
+        const user = req.body;
+        res.status(201).json(userHandler.create(user));
+    }catch(error){
+        res.status(500).send("Something went wrong");    
+    }
+}
+
+exports.get_all_users = (req, res) => {
+    try{
+        res.status(200).json(userHandler.readAll());    
+    }catch(error){
+        res.status(500).send("Something went wrong!");    
+    }
+}
+
+exports.get_user = (req, res) => {
+    try{
+        const id = req.params.id;
+        const user = userHandler.read(id);
+        if(user == undefined){
+            res.status(404).send("User not found!");
+            return;
+        }
+        res.status(200).json(user);    
+    }catch(error){
+        res.status(500).send("Something went wrong!");    
+    }
+}
+
+exports.put_user = (req, res) => {
+    try{
+        const id = req.params.id;
+        const user = req.body;
+        const oldUser = userHandler.read(id);
+        if(oldUser == undefined){
+            res.status(404).send("User not found!");
+            return;
+        }
+        res.status(200).json(userHandler.update(id, user));    
+    }catch(error){
+        res.status(500).send("Something went wrong!");    
+    }
+}
+
+exports.delete_user = (req, res) => {
+    try{
+        const id = req.params.id;
+        const user = userHandler.read(id);
+        if(user == undefined){
+            res.status(404).send("User not found!");
+            return;
+        }
+        res.status(200).json(userHandler.delete_user(id));    
+    }catch(error){
+        res.status(500).send("Something went wrong!");    
+    }
+}
+```
+
+## unit_tests.js
+
+```js
+const uuid = require('uuid');
+
+const users = []
+
+exports.create = (user) => {
+    user = {id: uuid.v4(), ...user};
+    users.push(user);
+    return user;
+  }
+  
+  exports.readAll = () => {
+    return users;
+  }
+
+  exports.read = (id) => {
+    const user = users.find(user => user.id == id);
+    return user;
+  }
+  
+  exports.update = (user) => {
+    const oldUser = users.find(user => user.id == id);
+    if(user.hasOwnProperty("name")){
+        oldUser.name = user.name;
+    }
+    if(user.hasOwnProperty("password")){
+        oldUser.password = user.password;
+    }
+    return oldUser;
+  }
+  
+  exports.delete = (id) => {
+    indx = users.findIndex(user => user.id === id);
+    const user = users.splice(indx, indx);
+    return  user;
+ }
+```
