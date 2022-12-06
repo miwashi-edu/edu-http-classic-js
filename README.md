@@ -1,6 +1,6 @@
 # edu-http-classic-js
 
-> Här separerar vi ren server-funktion från enpoints (routes) för vår microservice.
+> Här separerar vi ren server-funktion från end-points (routes) för vår microservice.
 
 ## Instruktioner
 
