@@ -21,7 +21,41 @@ touch ./domain/user_handler.js
 ## user_handler.js
 
 ```js
+const uuid = require('uuid');
 
+const users = []
+
+exports.create = (user) => {
+    user = {id: uuid.v4(), ...user};
+    users.push(user);
+    return user;
+  }
+  
+  exports.readAll = () => {
+    return users;
+  }
+
+  exports.read = (id) => {
+    const user = users.find(user => user.id == id);
+    return user;
+  }
+  
+  exports.update = (user) => {
+    const oldUser = users.find(user => user.id == id);
+    if(user.hasOwnProperty("name")){
+        oldUser.name = user.name;
+    }
+    if(user.hasOwnProperty("password")){
+        oldUser.password = user.password;
+    }
+    return oldUser;
+  }
+  
+  exports.delete = (id) => {
+    indx = users.findIndex(user => user.id === id);
+    const user = users.splice(indx, indx);
+    return  user;
+ }
 ```
 
 ## user_controller.js
@@ -93,39 +127,5 @@ exports.delete_user = (req, res) => {
 ## unit_tests.js
 
 ```js
-const uuid = require('uuid');
 
-const users = []
-
-exports.create = (user) => {
-    user = {id: uuid.v4(), ...user};
-    users.push(user);
-    return user;
-  }
-  
-  exports.readAll = () => {
-    return users;
-  }
-
-  exports.read = (id) => {
-    const user = users.find(user => user.id == id);
-    return user;
-  }
-  
-  exports.update = (user) => {
-    const oldUser = users.find(user => user.id == id);
-    if(user.hasOwnProperty("name")){
-        oldUser.name = user.name;
-    }
-    if(user.hasOwnProperty("password")){
-        oldUser.password = user.password;
-    }
-    return oldUser;
-  }
-  
-  exports.delete = (id) => {
-    indx = users.findIndex(user => user.id === id);
-    const user = users.splice(indx, indx);
-    return  user;
- }
 ```
