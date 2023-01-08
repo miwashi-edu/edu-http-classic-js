@@ -1,5 +1,15 @@
 # edu-http-classic-js
 
+```mermaid
+flowchart TD
+    main[En enkel server som levererar statisk index.html] --> 
+    level-1[Vi separerar Service från Server] --> 
+    level-2[Vi lägger till testkörningar] --> 
+    level-3[Vi lägger till endpoints/routes] --> 
+    level-4[Vi separerar controller från api] --> 
+    level-5[Vi separerar domain från controller]
+```
+
 ## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
 
 ## Förberedelse
