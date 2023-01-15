@@ -92,7 +92,7 @@ describe('When testing /api/user', () => {
     it('should work', async () => {
       const res = await request(app)
         .post('/api/user/')
-        .send({user:"user",password:"pw"});
+        .send({name:"name",password:"pw"});
       expect(res.statusCode).toEqual(201);
       expect(res.body).toHaveProperty('id');
     });
