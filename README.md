@@ -49,6 +49,7 @@ exports.delete_user = (req, res) => {
 ## user_routes.js
 
 ```
+const router = require('express').Router();
 const userController = require('../controllers/user_controller.js')
 
 router.post("/", userController.create_user);
