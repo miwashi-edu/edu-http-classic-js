@@ -42,7 +42,7 @@ git commit -m "Added test frameworks"
  */
 
 describe('jest', () => {
-  test('unit test', () => {
+  describe('unit test', () => {
     it('should work', () => {
       expect(1).toBe(1);
     });
@@ -58,7 +58,7 @@ describe('jest', () => {
  */
 
 describe('jest', () => {
-  test('component test', () => {
+  describe('component test', () => {
     it('should work', () => {
       expect(1).toBe(1);
     });
@@ -74,7 +74,7 @@ describe('jest', () => {
  */
 
 describe('jest', () => {
-  test('integration test', () => {
+  describe('integration test', () => {
     it('should work', () => {
       expect(1).toBe(1);
     });
