@@ -40,15 +40,15 @@ exports.create = (user) => {
     return user;
   }
   
-  exports.update = (user) => {
-    const oldUser = users.find(user => user.id == id);
+  exports.update = (id, user) => {
+    const savedUser = users.find(aUser => aUser.id == id);
     if(user.hasOwnProperty("name")){
-        oldUser.name = user.name;
+      savedUser.name = user.name;
     }
     if(user.hasOwnProperty("password")){
-        oldUser.password = user.password;
+      savedUser.password = user.password;
     }
-    return oldUser;
+    return savedUser;
   }
   
   exports.delete = (id) => {
@@ -68,6 +68,7 @@ exports.create_user = (req, res) => {
         const user = req.body;
         res.status(201).json(userHandler.create(user));
     }catch(error){
+        console.log(error);
         res.status(500).send("Something went wrong");    
     }
 }
@@ -76,6 +77,7 @@ exports.get_all_users = (req, res) => {
     try{
         res.status(200).json(userHandler.readAll());    
     }catch(error){
+        console.log(error);
         res.status(500).send("Something went wrong!");    
     }
 }
@@ -90,6 +92,7 @@ exports.get_user = (req, res) => {
         }
         res.status(200).json(user);    
     }catch(error){
+        console.log(error);
         res.status(500).send("Something went wrong!");    
     }
 }
@@ -105,6 +108,7 @@ exports.put_user = (req, res) => {
         }
         res.status(200).json(userHandler.update(id, user));    
     }catch(error){
+        console.log(error);
         res.status(500).send("Something went wrong!");    
     }
 }
@@ -117,9 +121,10 @@ exports.delete_user = (req, res) => {
             res.status(404).send("User not found!");
             return;
         }
-        res.status(200).json(userHandler.delete_user(id));    
+        res.status(204).json(userHandler.delete(id));    
     }catch(error){
-        res.status(500).send("Something went wrong!");    
+        console.log(error);
+        res.status(500).send(error);    
     }
 }
 ```
@@ -127,5 +132,163 @@ exports.delete_user = (req, res) => {
 ## unit_tests.js
 
 ```js
+
+```
+
+## component_tests.js
+
+```js
+/**
+ * @group component
+ */
+
+const request = require('supertest')
+const app = require('../server')
+let persisted_id = undefined;
+
+beforeEach(async () => {
+    const res = await request(app)
+        .post('/api/user/')
+        .send({name:"name",password:"pw"});
+    persisted_id = res.body.id;
+});
+
+describe('When testing /api/user', () => {
+  describe('Post', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .post('/api/user/')
+        .send({name:"name",password:"pw"});
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET All', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .get('/api/user/')
+      expect(res.statusCode).toEqual(200);
+      expect.arrayContaining(res.body);
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .get('/api/user/' + persisted_id);
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('PUT', () => {
+    it('should work', async () => {
+      const newPassword = "newPw";
+      const newName = "newName";
+      const res = await request(app)
+        .put('/api/user/' + persisted_id)
+        .send({ name: newName, password: newPassword });
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+      expect(res.body.name).toEqual(newName);
+      expect(res.body.password).toEqual(newPassword);
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('DELETE', () => {
+    it('should work', async () => {
+      const res = await request(app)
+        .delete('/api/user/' + persisted_id);
+      expect(res.statusCode).toEqual(204);
+    });
+  });
+});
+
+```
+
+## integration_tests.js
+
+```js
+/**
+ * @group integration
+ */
+
+const request = require('supertest')
+const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || `http://localhost:${PORT}`;
+const container = request(HOST);
+
+let persisted_id = undefined;
+
+beforeEach(async () => {
+  const res = await container
+      .post('/api/user/')
+      .send({name:"name",password:"pw"});
+  persisted_id = res.body.id;
+});
+
+describe('When testing /api/user', () => {
+  describe('Post', () => {
+    it('should work', async () => {
+      const res = await container
+        .post('/api/user/')
+        .send({name:"name",password:"pw"});
+      expect(res.statusCode).toEqual(201);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET All', () => {
+    it('should work', async () => {
+			const res = await container.get('/api/user/');
+			expect(res.statusCode).toEqual(200);
+      expect.arrayContaining(res.body);
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('GET', () => {
+    it('should work', async () => {
+      const res = await await container
+        .get('/api/user/' + persisted_id);
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('PUT', () => {
+    it('should work', async () => {
+      const res = await await container
+        .put('/api/user/' + persisted_id)
+        .send({name:"name",password:"pw"});
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty('id');
+    });
+  });
+});
+
+describe('When testing /api/user', () => {
+  describe('DELETE', () => {
+    it('should work', async () => {
+      const res = await await container
+        .delete('/api/user/' + persisted_id);
+      expect(res.statusCode).toEqual(204);
+    });
+  });
+});
 
 ```
