@@ -251,9 +251,9 @@ describe('When testing /api/user', () => {
 describe('When testing /api/user', () => {
   describe('GET All', () => {
     it('should work', async () => {
-			const res = await container.get('/api/user/');
-			expect(res.statusCode).toEqual(200);
-      expect.arrayContaining(res.body);
+	const res = await container.get('/api/user/');
+	expect(res.statusCode).toEqual(200);
+      	expect.arrayContaining(res.body);
     });
   });
 });
