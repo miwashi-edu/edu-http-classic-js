@@ -1,11 +1,8 @@
-const express = require('express')
-var favicon = require('serve-favicon')
-var path = require('path')
+const express = require('express');
+const app = express();
+app.use(express.json());
 
-const PORT = process.env.PORT || 3000
-
-const app = express()
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(express.static('public'))
+app.use('/api/user', require('./routes/user_routes.js'));
 
-app.listen(PORT, console.log(`http server listening on port ${PORT}`))
+module.exports = app;

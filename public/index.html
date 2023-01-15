@@ -2,9 +2,33 @@
 <html>
     <head>
         <link rel="stylesheet" href="/index.css">
+        <title>Simple Backend Micro Service</title>
     </head>
     <body>
-        <h1>Hello World</h1>
+        <h1>Simple Backend Micro Service</h1>
+
+        To Test:
+        <blockquote>
+            curl
+            <pre>
+curl -X POST http://localhost:3000/api/user -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X GET http://localhost:3000/api/user
+curl -X GET http://localhost:3000/api/user/1
+curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X DELETE http://localhost:3000/api/user/1
+            </pre>
+        </blockquote>
+
+        <blockquote>
+            node
+            <pre>
+npm test # Unit tests
+npm run component_test # Component tests
+npm start # Start server for integration tests
+npm run api_test # Integration Tests
+            </pre>
+        </blockquote>
+
         <script src='/index.js'/>
     </body>
 </html>
