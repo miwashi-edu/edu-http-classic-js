@@ -20,10 +20,10 @@ git commit -m "Added component and integration tests."
 ## DoD
 
 ```bash
-curl -X POST http://localhost:3000/api/user -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X POST http://localhost:3000/api/user -H 'Content-Type: application/json' -d '{"name":"name","password":"pw"}'
 curl -X GET http://localhost:3000/api/user
 curl -X GET http://localhost:3000/api/user/1
-curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -d '{"user":"user","password":"pw"}'
+curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -d '{"name":"newName","password":"pw"}'
 curl -X DELETE http://localhost:3000/api/user/1
 
 npm run component_test
@@ -126,7 +126,7 @@ describe('When testing /api/user', () => {
     it('should work', async () => {
       const res = await request(app)
         .put('/api/user/1')
-        .send({user:"user",password:"pw"});
+        .send({name:"name",password:"pw"});
       expect(res.statusCode).toEqual(200);
       expect(res.body).toHaveProperty('id');
     });
@@ -162,7 +162,7 @@ describe('When testing /api/user', () => {
     it('should work', async () => {
       const res = await container
         .post('/api/user/')
-        .send({user:"user",password:"pw"});
+        .send({name:"name",password:"pw"});
       expect(res.statusCode).toEqual(201);
       expect(res.body).toHaveProperty('id');
     });
@@ -195,7 +195,7 @@ describe('When testing /api/user', () => {
     it('should work', async () => {
       const res = await await container
         .put('/api/user/1')
-        .send({user:"user",password:"pw"});
+        .send({name:"name",password:"pw"});
       expect(res.statusCode).toEqual(200);
       expect(res.body).toHaveProperty('id');
     });
