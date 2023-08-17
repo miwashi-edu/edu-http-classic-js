@@ -51,9 +51,9 @@ touch ./public/index.html
 touch ./public/index.js
 touch ./public/index.css
 curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-curl -L https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
-curl -L https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
+curl -L https://gist.github.com/miwashi/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
+curl -L https://gist.github.com/miwashi/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
+curl -L https://gist.github.com/miwashi/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
 npm pkg set scripts.dev="nodemon server.js"
 npm pkg set scripts.test="jest"
 npm install express
