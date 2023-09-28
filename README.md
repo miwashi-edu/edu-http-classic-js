@@ -1,83 +1,102 @@
 # edu-http-classic-js
 
-```mermaid
-flowchart TD
-    main[main, En enkel server som levererar statisk index.html] --> 
-    level-1[ level-1, Vi separerar Service från Server] --> 
-    level-2[ level-2, Vi lägger till testkörningar] --> 
-    level-3[ level-3, Vi lägger till endpoints/routes] --> 
-    level-4[ level-4, Vi separerar controller från api] --> 
-    level-5[ level-5, Vi separerar domain från controller]
-```
+> Vi lägger till dokumentation av backend servern för att hjälpa testare och frontendutvecklare.
 
-## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
-
-## Förberedelse
-
-> Registrera konto på [Heroku](https://devcenter.heroku.com/). Det är frivilligt, då det är en betaltjänst och kräver kreditkort. 
-> Heroku är dock det absolut lättaste sättet att få en Node.js applikation i drift, så det kan vara värt det.
-
-### PC
+## Lägg till swagger
 
 ```bash
-choco install curl
-choco install heroku-cli
+npm install swagger-jsdoc
+npm install swagger-ui-express
 ```
 
-### Mac
+## Lägg till swagger konfiguration i server.js
 
-```bash
-brew tap heroku/brew && brew install heroku
+### server.js
+
+```js
+const express = require('express');
+const cors = require('cors')
+var favicon = require('serve-favicon');
+var path = require('path');
+const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
+
+
+const app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
+app.use(express.static('public'));
+
+const swaggerOptions = {
+    swaggerDefinition: {
+        info: {
+            version: "1.0.0",
+            title: "HTTP Classic API",
+            description: "API Information of http-classic-js",
+            contact: {
+                name: "Wacoco@wacoco.se"
+            },
+            servers: ["http://localhost:3001"]
+        }
+    },
+    apis: ['./routes/*.js']
+};
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
+app.use('/api/user', require('./routes/user_routes.js'));
+
+module.exports = app;
 ```
 
-[serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
-[nodemon](https://www.npmjs.com/package/nodemon)
-[jest](https://www.npmjs.com/package/jest)
-[path](https://www.npmjs.com/package/path)
-[express](https://www.npmjs.com/package/express)
+## Lägg till dokumentation i Routes
 
-## Instructions
+> Här kommer en av orsakerna till att vi höll routes relativt rent. Vi kommer att lägga till en doc tag till varje route. Denna doctag innehåller en @swagger märkning och
+> en beskrivning av tjänsten i språket YAML. (Yet Another Markup Language). Yaml är lite krångligt när den skrivs i en doc tag, så detta är en av de situationerna där vi
+> google kodar. Vå ber helt enkelt chat gpt att beskriva vår tjänst som yaml i en doc tag. Ta med endpoint, huvudflöde och alternativflöden samt även vad den ska returnera.
+> Följande doc taggar skapade med chat gpt läggs i routes.
 
-```bash
-cd ~
-cd ws
-rm -rf edu-http-classic #Om den finns
-mkdir edu-http-classic
-cd edu-http-classic
-touch server.js
-npm init -y
-mkdir public
-touch ./public/index.html
-touch ./public/index.js
-touch ./public/index.css
-curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-curl -L https://gist.github.com/miwashi/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashi/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
-curl -L https://gist.github.com/miwashi/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
-npm pkg set scripts.dev="nodemon server.js"
-npm pkg set scripts.test="jest"
-npm install express
-npm install path
-npm install serve-favicon
-npm install nodemon --save-dev
-npm install jest --save-dev
-echo "web: npm start" > Procfile
-git init
-git add .
-git commit -m "Initial commit"
+```js
+/**
+ * @swagger
+ * /player/create/:
+ *   get:  # It's more appropriate to use POST here since it's a creation operation.
+ *     tags:
+ *       - Players
+ *     description: Creates a new player and returns an ID along with a random user ID
+ *     responses:
+ *       201:
+ *         description: Player successfully created
+ *         schema:
+ *           type: object
+ *           properties:
+ *             id:
+ *               type: string
+ *               format: uuid
+ *               description: The ID of the newly created player
+ *             userId:
+ *               type: string
+ *               format: uuid
+ *               description: Randomly generated user ID for the player
+ *       500:
+ *         description: Server error
+ */
+router.get('/player/create/', userController.createPlayer);
+
+/**
+ * @swagger
+ * definitions:
+ *   User:
+ *     type: object
+ *     required:
+ *       - id
+ *       - name
+ *     properties:
+ *       id:
+ *         type: string
+ *         format: uuid
+ *       name:
+ *         type: string
+ */
 ```
-
-![favicon](https://www.jensenyh.se/favicon.ico)  
-[gist: server.js]( https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529)  
-[gist: index.html](https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8)  
-[gist: .gitignore](https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796)  
-
-```bash
-heroku login
-heroku create edu-http-classic-[lägg till något unikt]
-git push heroku main
-heroku open
-heroku logs --tail
-heroku destroy --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
-```
-
