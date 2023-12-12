@@ -19,17 +19,6 @@ flowchart TD
 
 ### PC
 
-```bash
-choco install curl
-choco install heroku-cli
-```
-
-### Mac
-
-```bash
-brew tap heroku/brew && brew install heroku
-```
-
 [serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
 [nodemon](https://www.npmjs.com/package/nodemon)
 [jest](https://www.npmjs.com/package/jest)
@@ -41,43 +30,63 @@ brew tap heroku/brew && brew install heroku
 ```bash
 cd ~
 cd ws
-rm -rf edu-http-classic #Om den finns
-mkdir edu-http-classic
-cd edu-http-classic
-touch server.js
+rm -rf http-classic #Om den finns
+mkdir http-classic
+cd http-classic
 npm init -y
+mkdir src
 mkdir public
+touch ./src/server.js
 touch ./public/index.html
 touch ./public/index.js
 touch ./public/index.css
 curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-curl -L https://gist.github.com/miwashi/f58042d997beb7983f91152c7b555529/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashi/44bb4bc1d82f0952ffbf6c55fbd63ec8/raw/index.html -o  ./public/index.html
-curl -L https://gist.github.com/miwashi/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
-npm pkg set scripts.dev="nodemon server.js"
+npm pkg set scripts.start="node ./src/server.js"
+npm pkg set scripts.dev="node --watch ./src/server.js"
 npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
-npm install nodemon --save-dev
-npm install jest --save-dev
-echo "web: npm start" > Procfile
+touch ./src/server.js
 git init
 git add .
 git commit -m "Initial commit"
 ```
 
 ![favicon](https://www.jensenyh.se/favicon.ico)  
-[gist: server.js]( https://gist.github.com/miwashiab/f58042d997beb7983f91152c7b555529)  
-[gist: index.html](https://gist.github.com/miwashiab/44bb4bc1d82f0952ffbf6c55fbd63ec8)  
-[gist: .gitignore](https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796)  
+  
+## server.js
 
 ```bash
-heroku login
-heroku create edu-http-classic-[lägg till något unikt]
-git push heroku main
-heroku open
-heroku logs --tail
-heroku destroy --app create edu-http-classic-[det unika du lade till] -c edu-http-classic-[det unika du lade till]
+cat > ./src/server.js << 'EOF'
+const express = require('express')
+var favicon = require('serve-favicon')
+var path = require('path')
+
+const PORT = process.env.PORT || 3000
+
+const app = express()
+app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')))
+app.use(express.static('public'))
+
+app.listen(PORT, console.log(`http server listening on port ${PORT}`))
+EOF
+```
+
+### index.html
+
+```bash
+cat > ./public/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/index.css">
+    </head>
+    <body>
+        <h1>Hello World</h1>
+        <script src='/index.js'/>
+    </body>
+</html>
+EOF
 ```
 
