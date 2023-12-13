@@ -40,7 +40,7 @@ touch ./src/server.js
 touch ./public/index.html
 touch ./public/index.js
 touch ./public/index.css
-curl https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
+curl -L https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
 npm pkg set scripts.start="node ./src/server.js"
 npm pkg set scripts.dev="node --watch ./src/server.js"
 npm pkg set scripts.test="jest"
