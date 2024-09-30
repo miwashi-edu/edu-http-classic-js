@@ -80,6 +80,7 @@ module.exports = router;
 ## component_test.js
 
 ```js
+cat > ./__tests__/component_test.js << 'EOF'
 /**
  * @group component
  */
@@ -142,12 +143,13 @@ describe('When testing /api/user', () => {
     });
   });
 });
-
+EOF
 ```
 
 ## integration_test.js
 
 ```js
+cat > ./__tests__/integration_test.js << 'EOF'
 /**
  * @group integration
  */
@@ -211,5 +213,5 @@ describe('When testing /api/user', () => {
     });
   });
 });
-
+EOF
 ```
