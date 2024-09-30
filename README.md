@@ -77,7 +77,7 @@ router.delete("/:id", (req, res) => {
 module.exports = router;
 ```
 
-## component_test.js
+## component_test.js <heredoc
 
 ```js
 cat > ./__tests__/component_test.js << 'EOF'
@@ -146,7 +146,7 @@ describe('When testing /api/user', () => {
 EOF
 ```
 
-## integration_test.js
+## integration_test.js <heredoc
 
 ```js
 cat > ./__tests__/integration_test.js << 'EOF'
