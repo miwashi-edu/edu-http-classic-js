@@ -20,6 +20,7 @@ npm start
 ```bash
 cd ~
 cd ws
+cd http-classic
 touch service.js
 touch {.env,.env.test}
 npm install dotenv
