@@ -10,7 +10,7 @@ flowchart TD
     level-5[ level-5, Vi separerar domain från controller]
 ```
 
-## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.
+## Förväntad tid 6:30 minuter, inklusive skriva app.js utantill.
 
 ## Förberedelse
 
@@ -36,18 +36,18 @@ cd http-classic
 npm init -y
 mkdir src
 mkdir public
-touch ./src/server.js
+touch ./src/app.js
 touch ./public/index.html
 touch ./public/index.js
 touch ./public/index.css
 curl -L https://www.jensenyh.se/favicon.ico -o ./public/favicon.ico
-npm pkg set scripts.start="node ./src/server.js"
-npm pkg set scripts.dev="node --watch ./src/server.js"
+npm pkg set scripts.start="node ./src/app.js"
+npm pkg set scripts.dev="node --watch ./src/app.js"
 npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
-touch ./src/server.js
+touch ./src/app.js
 git init
 git add .
 git commit -m "Initial commit"
@@ -55,10 +55,10 @@ git commit -m "Initial commit"
 
 ![favicon](https://www.jensenyh.se/favicon.ico)  
   
-## server.js
+## app.js
 
 ```bash
-cat > ./src/server.js << 'EOF'
+cat > ./src/app.js << 'EOF'
 const express = require('express')
 var favicon = require('serve-favicon')
 var path = require('path')
