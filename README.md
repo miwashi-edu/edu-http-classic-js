@@ -25,8 +25,8 @@ touch ./src/service.js
 touch {.env,.env.test}
 npm install dotenv
 npm pkg set main="./src/service.js"
-npm pkg set scripts.start="node service.js"
-npm pkg set scripts.dev="node --watch ./src/app.js"
+npm pkg set scripts.start="node ./src/service.js"
+npm pkg set scripts.dev="node --watch ./src/service.js"
 git add .
 git commit -m "Separated app from service"
 ```
