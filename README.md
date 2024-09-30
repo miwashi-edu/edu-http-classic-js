@@ -17,6 +17,7 @@ npm run test:integration
 ```bash
 cd ~
 cd ws
+cd http-classic
 mkdir __tests__
 touch ./__tests__/{unit_tests.js,component_tests.js,integration_tests.js}
 touch {.env,.env.test}
