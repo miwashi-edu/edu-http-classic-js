@@ -23,9 +23,9 @@ curl -X GET http://localhost:3000/api/user/1
 curl -X PUT http://localhost:3000/api/user/1 -H 'Content-Type: application/json' -d '{"name":"newName","password":"pw"}'
 curl -X DELETE http://localhost:3000/api/user/1
 
-npm run component_test
-npm start
 npm run test:component
+npm start
+npm run test:integration
 ```
 
 ## app.js
