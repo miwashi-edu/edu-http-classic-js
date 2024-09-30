@@ -8,7 +8,7 @@
 cd ~
 cd ws
 cd http-classic
-mkdir routes
+mkdir ./src/routes
 touch ./src/routes/user_routes.js
 git add .
 git commit -m "Added component and integration tests."
