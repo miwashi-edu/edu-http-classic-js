@@ -19,7 +19,6 @@ cd ~
 cd ws
 mkdir __tests__
 touch ./__tests__/{unit_tests.js,component_tests.js,integration_tests.js}
-touch service.js
 touch {.env,.env.test}
 npm install -D jest
 npm install -D jest-runner-groups
