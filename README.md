@@ -34,7 +34,7 @@ git commit -m "Separated server from service"
 
 ```js
 require('dotenv').config();
-const app = require('./server.js');
+const app = require('./app.js');
 var favicon = require('serve-favicon');
 var path = require('path');
 
@@ -46,7 +46,7 @@ app.listen(PORT, () => {
 });
 ```
 
-## server.js
+## app.js
 
 ```js
 const express = require('express');
