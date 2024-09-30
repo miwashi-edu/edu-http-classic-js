@@ -9,10 +9,7 @@ cd ~
 cd ws
 cd http-classic
 mkdir routes
-touch ./routes/user_routes.js
-vi ./routes/user_routes.js
-vi ./__tests__/component_test.js
-vi ./__tests__/integration_test.js
+touch ./src/routes/user_routes.js
 git add .
 git commit -m "Added component and integration tests."
 ```
@@ -28,7 +25,7 @@ curl -X DELETE http://localhost:3000/api/user/1
 
 npm run component_test
 npm start
-npm run api_test
+npm run test:component
 ```
 
 ## app.js
@@ -80,13 +77,13 @@ module.exports = router;
 ## component_test.js <heredoc
 
 ```js
-cat > ./__tests__/component_test.js << 'EOF'
+cat > ./__tests__/component_tests.js << 'EOF'
 /**
  * @group component
  */
 
 const request = require('supertest')
-const app = require('../app')
+const app = require('../src/app')
 
 describe('When testing /api/user', () => {
   describe('Post', () => {
@@ -149,7 +146,7 @@ EOF
 ## integration_test.js <heredoc
 
 ```js
-cat > ./__tests__/integration_test.js << 'EOF'
+cat > ./__tests__/integration_tests.js << 'EOF'
 /**
  * @group integration
  */
