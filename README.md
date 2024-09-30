@@ -21,10 +21,10 @@ npm start
 cd ~
 cd ws
 cd http-classic
-touch service.js
+touch ./src/service.js
 touch {.env,.env.test}
 npm install dotenv
-npm pkg set main="service.js"
+npm pkg set main="./src/service.js"
 npm pkg set scripts.start="node service.js"
 npm pkg set scripts.dev="node --watch ./src/app.js"
 git add .
