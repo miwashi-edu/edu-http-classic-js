@@ -73,7 +73,7 @@ EOF
 ### integration_tests.js <docere
 
 ```js
-cat > ./__tests__/integration_test.js << 'EOF'
+cat > ./__tests__/integration_tests.js << 'EOF'
 /**
  * @group integration
  */
