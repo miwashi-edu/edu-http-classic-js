@@ -8,8 +8,8 @@
 
 ```bash
 npm test
-npm run component_test
-npm run integration_test
+npm run test:component
+npm run test:integration
 ```
 
 ## Instruktioner
@@ -25,8 +25,8 @@ npm install -D jest
 npm install -D jest-runner-groups
 npm install -D supertest
 npm pkg set scripts.test="jest  --group=-component --group=-integration"
-npm pkg set scripts.component_test="jest --group=component"
-npm pkg set scripts.integration_test="jest --group=integration"
+npm pkg set scripts.test:component="jest --group=component"
+npm pkg set scripts.test:integration="jest --group=integration"
 npm pkg set jest.runner="groups"
 git add .
 git commit -m "Added test frameworks"
@@ -34,9 +34,10 @@ git commit -m "Added test frameworks"
 
 ## Tests
 
-### unit_tests.js
+### unit_tests.js <heredoc
 
 ```js
+cat > __tests__/unit_tests.js << 'EOF'
 /**
  * @group unit
  */
@@ -48,11 +49,13 @@ describe('jest', () => {
     });
   });
 });
+EOF
 ```
 
-### component_tests.js
+### component_tests.js <dochere
 
 ```js
+cat > __tests__/component_tests.js << 'EOF'
 /**
  * @group component
  */
@@ -64,11 +67,13 @@ describe('jest', () => {
     });
   });
 });
+EOF
 ```
 
-### integration_tests.js
+### integration_tests.js <docere
 
 ```js
+cat > __tests__/integration_test.js << 'EOF'
 /**
  * @group integration
  */
@@ -80,4 +85,5 @@ describe('jest', () => {
     });
   });
 });
+EOF
 ```
