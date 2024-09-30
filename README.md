@@ -57,6 +57,8 @@ module.exports = app;
 > google kodar. Vå ber helt enkelt chat gpt att beskriva vår tjänst som yaml i en doc tag. Ta med endpoint, huvudflöde och alternativflöden samt även vad den ska returnera.
 > Följande doc taggar skapade med chat gpt läggs i routes.
 
+> Nedan är ett exempel på swagger yaml, men använd chatgpt, klistra in dina routes i chatgpt och din app.js, **be chatgpt skriva din swagger definition i routes**.
+
 ```js
 /**
  * @swagger
