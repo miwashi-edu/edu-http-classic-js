@@ -27,7 +27,7 @@ npm pkg set main="service.js"
 npm pkg set scripts.start="node service.js"
 npm pkg set scripts.dev="nodemon service.js"
 git add .
-git commit -m "Separated server from service"
+git commit -m "Separated app from service"
 ```
 
 ## service.js
