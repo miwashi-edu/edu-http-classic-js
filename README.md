@@ -9,9 +9,9 @@ npm install swagger-jsdoc
 npm install swagger-ui-express
 ```
 
-## Lägg till swagger konfiguration i server.js
+## Lägg till swagger konfiguration i app.js
 
-### server.js
+### app.js
 
 ```js
 const express = require('express');
