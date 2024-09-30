@@ -1,6 +1,6 @@
 # edu-http-classic-js
 
-> Här separerar vi ren server-funktion från end-points (routes) för vår microservice.
+> Här separerar vi ren app-funktion från end-points (routes) för vår microservice.
 
 ## Instruktioner
 
@@ -86,7 +86,7 @@ cat > ./__tests__/component_test.js << 'EOF'
  */
 
 const request = require('supertest')
-const app = require('../server')
+const app = require('../app')
 
 describe('When testing /api/user', () => {
   describe('Post', () => {
