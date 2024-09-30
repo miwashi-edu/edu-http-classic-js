@@ -31,7 +31,7 @@ npm start
 npm run api_test
 ```
 
-## server.js
+## app.js
 
 ```js
 const express = require('express');
