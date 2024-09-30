@@ -7,7 +7,7 @@
 ```bash
 cd ~
 cd ws
-cd edu-http-classic
+cd http-classic
 mkdir routes
 touch ./routes/user_routes.js
 vi ./routes/user_routes.js
