@@ -36,7 +36,7 @@ git commit -m "Added test frameworks"
 ### unit_tests.js <heredoc
 
 ```js
-cat > __tests__/unit_tests.js << 'EOF'
+cat > ./__tests__/unit_tests.js << 'EOF'
 /**
  * @group unit
  */
@@ -54,7 +54,7 @@ EOF
 ### component_tests.js <dochere
 
 ```js
-cat > __tests__/component_tests.js << 'EOF'
+cat > ./__tests__/component_tests.js << 'EOF'
 /**
  * @group component
  */
@@ -72,7 +72,7 @@ EOF
 ### integration_tests.js <docere
 
 ```js
-cat > __tests__/integration_test.js << 'EOF'
+cat > ./__tests__/integration_test.js << 'EOF'
 /**
  * @group integration
  */
