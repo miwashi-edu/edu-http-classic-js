@@ -3,11 +3,11 @@
 ```mermaid
 flowchart TD
     main[main, En enkel server som levererar statisk index.html] --> 
-    level-1[ level-1, Vi separerar Service från Server] --> 
-    level-2[ level-2, Vi lägger till testkörningar] --> 
-    level-3[ level-3, Vi lägger till endpoints/routes] --> 
-    level-4[ level-4, Vi separerar controller från api] --> 
-    level-5[ level-5, Vi separerar domain från controller]
+    level-1[ level-1 Vi separerar Service från Server] --> 
+    level-2[ level-2 Vi lägger till testkörningar] --> 
+    level-3[ level-3 Vi lägger till endpoints/routes] --> 
+    level-4[ level-4 Vi separerar controller från api] --> 
+    level-5[ level-5 Vi separerar domain från controller]
 ```
 
 ## Förväntad tid 6:30 minuter, inklusive skriva app.js utantill.
