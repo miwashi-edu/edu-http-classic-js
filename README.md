@@ -85,3 +85,58 @@ cat > ./public/index.html << 'EOF'
 EOF
 ```
 
+### .gitignore
+
+```bash
+cat > .gitignore << 'EOF'
+# Dependencies
+/node_modules
+
+# Build outputs
+/build
+/dist
+
+# Storybook build directory
+/storybook-static
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+
+# Test files
+/coverage
+
+# Compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Lock files
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+EOF
+```
+
