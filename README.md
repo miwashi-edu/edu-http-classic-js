@@ -11,16 +11,17 @@
 ```bash
 cd ~
 cd ws
-cd edu-http-classic
+cd http-classic
 npm install uuid
-mkdir domain
-touch ./domain/user_handler.js
+mkdir ./src/domain
+touch ./src/domain/user_handler.js
 
 ```
 
-## user_handler.js
+## user_handler.js <heredoc
 
 ```js
+cat > ./src/domain/user_handler.js << 'EOF'
 const uuid = require('uuid');
 
 const users = []
@@ -56,11 +57,13 @@ exports.create = (user) => {
     const user = users.splice(indx, indx);
     return  user;
  }
+EOF
 ```
 
 ## user_controller.js
 
 ```js
+cat > ./src/controllers/user_controller.js << 'EOF'
 const userHandler = require('../domain/user_handler.js');
 
 exports.create_user = (req, res) => {
@@ -127,6 +130,7 @@ exports.delete_user = (req, res) => {
         res.status(500).send(error);    
     }
 }
+EOF
 ```
 
 ## unit_tests.js
