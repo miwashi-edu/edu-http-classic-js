@@ -7,10 +7,9 @@
 ```bash
 cd ~
 cd ws
-mkdir controllers
+cd http-classic
+mkdir ./src/controllers
 touch ./src/controllers/user_controller.js
-vi ./src/routes/user_routes.js
-vi ./src/controllers/user_controller.js
 git add .
 git commit -m "Added controller"
 ```
@@ -51,7 +50,7 @@ EOF
 ## user_routes.js <heredoc
 
 ```
-cat > ./src/controllers/user_routes.js << 'EOF'
+cat > ./src/routes/user_routes.js << 'EOF'
 const router = require('express').Router();
 const userController = require('../controllers/user_controller.js')
 
