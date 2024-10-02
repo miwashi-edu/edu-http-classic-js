@@ -23,7 +23,7 @@ const swaggerUi = require("swagger-ui-express");
 
 
 const app = express();
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')));
 app.use(cors());
 app.use(express.static('public'));
 
@@ -34,7 +34,7 @@ const swaggerOptions = {
             title: "HTTP Classic API",
             description: "API Information of http-classic-js",
             contact: {
-                name: "Wacoco@wacoco.se"
+                name: "user@example.com"
             },
             servers: ["http://localhost:3001"]
         }
