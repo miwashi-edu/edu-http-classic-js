@@ -42,7 +42,6 @@ npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
-touch ./src/app.js
 git init
 git add .
 git commit -m "Initial commit"
