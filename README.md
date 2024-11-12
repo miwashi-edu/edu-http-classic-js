@@ -30,7 +30,8 @@ npm run test:integration
 
 ## app.js
 
-```js
+```bash
+cat > ./src/app.js << 'EOF'
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -38,11 +39,13 @@ app.use(express.json());
 app.use('/api/user', require('./routes/user_routes.js'));
 
 module.exports = app;
+EOF
 ````
 
 ## user_routes.js
 
-```js
+```bash
+cat > ./src/routes/user_routes.js << 'EOF'
 const router = require('express').Router();
 
 //Create from posted json
@@ -72,6 +75,7 @@ router.delete("/:id", (req, res) => {
 });
 
 module.exports = router;
+EOF
 ```
 
 ## component_test.js <heredoc
