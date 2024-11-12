@@ -33,7 +33,8 @@ git commit -m "Separated app from service"
 
 ## service.js
 
-```js
+```bash
+cat > ./src/service.js << 'EOF'
 require('dotenv').config();
 const app = require('./app.js');
 let favicon = require('serve-favicon');
@@ -45,14 +46,17 @@ app.use(favicon(path.join(__dirname, '../public', 'favicon.ico')))
 app.listen(PORT, () => {
     console.log(`http server listening on port ${PORT}`)
 });
+EOF
 ```
 
 ## app.js
 
-```js
+```bash
+cat > ./src/app.js << 'EOF'
 const express = require('express');
 const app = express();
 app.use(express.json());
 
 module.exports = app;
+EOF
 ```
