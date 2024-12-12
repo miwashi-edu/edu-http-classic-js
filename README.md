@@ -47,6 +47,8 @@ app.listen(PORT, () => {
     console.log(`http server listening on port ${PORT}`)
 });
 EOF
+git add .
+git commit -m "added service.js"
 ```
 
 ## app.js
@@ -59,4 +61,6 @@ app.use(express.json());
 
 module.exports = app;
 EOF
+git add .
+git commit -m "added app.js"
 ```
