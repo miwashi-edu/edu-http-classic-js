@@ -16,8 +16,8 @@ npm install swagger-ui-express
 ```js
 const express = require('express');
 const cors = require('cors')
-var favicon = require('serve-favicon');
-var path = require('path');
+let favicon = require('serve-favicon');
+let path = require('path');
 const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
