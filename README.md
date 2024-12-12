@@ -42,6 +42,7 @@ npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
+curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
 git init
 git add .
 git commit -m "Initial commit"
@@ -65,6 +66,9 @@ app.use(express.static('public'))
 
 app.listen(PORT, console.log(`http server listening on port ${PORT}`))
 EOF
+
+git add .
+git commit -m "Added app.js"
 ```
 
 ### index.html
@@ -82,60 +86,8 @@ cat > ./public/index.html << 'EOF'
     </body>
 </html>
 EOF
-```
 
-### .gitignore
-
-```bash
-cat > .gitignore << 'EOF'
-# Dependencies
-/node_modules
-
-# Build outputs
-/build
-/dist
-
-# Storybook build directory
-/storybook-static
-
-# Environment files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# Debug logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.vscode
-.idea
-*.swp
-*.swo
-.DS_Store
-
-# OS generated files
-Thumbs.db
-Desktop.ini
-
-# Test files
-/coverage
-
-# Compiled files
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
-
-# Lock files
-yarn.lock
-package-lock.json
-pnpm-lock.yaml
-EOF
+git add .
+git commit -m "Added index.html"
 ```
 
