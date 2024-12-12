@@ -5,11 +5,11 @@
 ## Info
 
 [serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
-[nodemon](https://www.npmjs.com/package/nodemon)
-[jest](https://www.npmjs.com/package/jest)
-[path](https://www.npmjs.com/package/path)
-[express](https://www.npmjs.com/package/express)
-![favicon](https://www.jensenyh.se/favicon.ico)
+[nodemon](https://www.npmjs.com/package/nodemon)  
+[jest](https://www.npmjs.com/package/jest)  
+[path](https://www.npmjs.com/package/path)  
+[express](https://www.npmjs.com/package/express)  
+![favicon](https://www.jensenyh.se/favicon.ico)  
 
 ## Instructions
 
