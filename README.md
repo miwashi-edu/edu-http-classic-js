@@ -1,6 +1,6 @@
 # edu-http-classic-js
 
-## Expected time 6:30 minutes.
+> Expected time 6:30 minutes. Level main publishes a folder as a web application to be accessed with http://localhost:3000.
 
 ## Info
 
