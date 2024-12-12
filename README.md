@@ -1,24 +1,15 @@
 # edu-http-classic-js
 
-```mermaid
-flowchart TD
-    main[Mapp på nätet] --> 
-    level-1[ separerar App från Server ] --> 
-    level-2[ lägger till test] --> 
-    level-3[ separerar routes] --> 
-    level-4[ separerar controller från routes] --> 
-    level-5[ separerar domain från controller]
-```
+## Expected time 6:30 minutes.
 
-## Förväntad tid 6:30 minuter, inklusive skriva app.js utantill.
-
-### PC
+## Info
 
 [serve-favicon](https://expressjs.com/en/resources/middleware/serve-favicon.html)  
 [nodemon](https://www.npmjs.com/package/nodemon)
 [jest](https://www.npmjs.com/package/jest)
 [path](https://www.npmjs.com/package/path)
 [express](https://www.npmjs.com/package/express)
+![favicon](https://www.jensenyh.se/favicon.ico)
 
 ## Instructions
 
@@ -42,13 +33,19 @@ npm pkg set scripts.test="jest"
 npm install express
 npm install path
 npm install serve-favicon
-curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+echo "node_modules" > .gitignore
 git init
 git add .
 git commit -m "Initial commit"
 ```
 
-![favicon](https://www.jensenyh.se/favicon.ico)  
+## Alternative .gitignore
+
+> Not must have, nice to have
+
+```bash
+curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
+```  
   
 ## app.js
 
@@ -91,3 +88,14 @@ git add .
 git commit -m "Added index.html"
 ```
 
+## Workflow
+
+```mermaid
+flowchart TD
+    main[Mapp på nätet] --> 
+    level-1[ separerar App från Server ] --> 
+    level-2[ lägger till test] --> 
+    level-3[ separerar routes] --> 
+    level-4[ separerar controller från routes] --> 
+    level-5[ separerar domain från controller]
+```
