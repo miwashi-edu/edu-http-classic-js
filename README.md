@@ -52,8 +52,8 @@ curl -o .gitignore https://raw.githubusercontent.com/github/gitignore/main/Node.
 ```bash
 cat > ./src/app.js << 'EOF'
 const express = require('express')
-let favicon = require('serve-favicon')
-let path = require('path')
+const favicon = require('serve-favicon')
+const path = require('path')
 
 const PORT = process.env.PORT || 3000
 
