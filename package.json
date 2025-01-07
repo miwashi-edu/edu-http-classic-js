@@ -2,10 +2,10 @@
   "name": "edu-http-classic",
   "version": "1.0.0",
   "description": "## Förväntad tid 6:30 minuter, inklusive skriva server.js utantill.",
-  "main": "service.js",
+  "main": "src/service.js",
   "scripts": {
-    "start": "node service.js",
-    "dev": "nodemon service.js",
+    "start": "node ./src/service.js",
+    "dev": "node --watch ./src/service.js",
     "test": "jest  --group=-component --group=-integration",
     "component_test": "jest --group=component",
     "integration_test": "jest --group=integration"
@@ -32,7 +32,7 @@
   "devDependencies": {
     "jest": "^28.1.3",
     "jest-runner-groups": "^2.2.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.1.9",
     "supertest": "^6.3.3"
   },
   "jest": {
